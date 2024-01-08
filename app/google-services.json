@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "488450062689",
+    "project_id": "loterica-83dc6",
+    "storage_bucket": "loterica-83dc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488450062689:android:8bc16d3e6418016e466d20",
+        "android_client_info": {
+          "package_name": "br.ifsul"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaiQC7pFmLkWurM4Oywxnx2qsxqxdZ_yM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
