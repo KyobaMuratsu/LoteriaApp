@@ -7,21 +7,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import br.ifsul.R;
+import br.ifsul.databinding.ActivityLoteriaBinding;
 import br.ifsul.model.Sorteio;
 import br.ifsul.retrofit.ApiService;
 import br.ifsul.retrofit.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoteriaActivity extends AppCompatActivity {
 
@@ -30,10 +31,24 @@ public class LoteriaActivity extends AppCompatActivity {
 
     private ApiService lotteryService;
 
+    private ActivityLoteriaBinding binding;
+
+    private GridView gridView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loteria);
+
+        gridView = (GridView) findViewById(R.id.simpleGridView);
+
+        binding = ActivityLoteriaBinding.inflate(getLayoutInflater());
+
+        setContentView(binding.getRoot());
+
+        Retrofit retrofit = RetrofitClient.getRetrofitInstance();
+
+        lotteryService = retrofit.create(ApiService.class);
 
         dropdown = findViewById(R.id.conteudoDropdown);
 
@@ -60,11 +75,20 @@ public class LoteriaActivity extends AppCompatActivity {
                     case "megasena":
                         Log.d("onItemSelected: ", "Selected:MegaSena");
                         Call<Sorteio> callMega = lotteryService.getMegasena();
+
                         callMega.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
+
+                                    gridView.setAdapter(new ArrayAdapter<>(getApplicationContext(),
+                                            android.R.layout.simple_list_item_1,
+                                            result.getNumerosSorteados()
+                                    ));
+
+                                    Log.d("aa", result.getNumerosSorteados().get(0) + "");
+
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
                                     } else {
