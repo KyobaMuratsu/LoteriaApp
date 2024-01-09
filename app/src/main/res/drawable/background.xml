@@ -2,8 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <solid android:color="#70E91A"/> <!-- Background color, replace with your desired color -->
+        <solid android:color="#2B6800"/> <!-- Background color, replace with your desired color -->
         <corners android:radius="10dp"/> <!-- Adjust corner radius as needed -->
+        <size android:height="25dp"
+            android:width="25dp"/>
     </shape>
 
 </selector>

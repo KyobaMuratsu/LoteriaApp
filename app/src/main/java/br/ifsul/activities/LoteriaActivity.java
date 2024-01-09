@@ -9,7 +9,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,21 +33,31 @@ import retrofit2.Response;
 
 public class LoteriaActivity extends AppCompatActivity {
 
-    private GridLayout gridLayout;
+//    private GridLayout gridLayout;
+
+    private GridView gridView;
 
     private Spinner dropdown;
     private ApiService lotteryService;
+
+    private Button btn;
+
+    private List<Integer> numbers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loteria);
 
+        btn = findViewById(R.id.shuffle_btn);
+
         dropdown = findViewById(R.id.conteudoDropdown);
 
         lotteryService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        gridLayout = findViewById(R.id.gridLayout);
+//        gridLayout = findViewById(R.id.gridLayout);
+
+        gridView = (GridView) findViewById(R.id.gridLayout);
 
         List<String> sorteios = new ArrayList<>();
         sorteios.add("MegaSena");
@@ -75,7 +87,8 @@ public class LoteriaActivity extends AppCompatActivity {
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
-                                    createGridByDataFromApi(result.getNumerosSorteados());
+
+                                    numbers = response.body().getNumerosSorteados();
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
                                     } else {
@@ -102,6 +115,8 @@ public class LoteriaActivity extends AppCompatActivity {
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
+
+                                    numbers = response.body().getNumerosSorteados();
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
 
@@ -129,6 +144,8 @@ public class LoteriaActivity extends AppCompatActivity {
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
+
+                                    numbers = response.body().getNumerosSorteados();
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
                                     } else {
@@ -154,6 +171,8 @@ public class LoteriaActivity extends AppCompatActivity {
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
+
+                                    numbers = response.body().getNumerosSorteados();
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
                                     } else {
@@ -179,6 +198,8 @@ public class LoteriaActivity extends AppCompatActivity {
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
                                     Sorteio result = response.body();
+
+                                    numbers = response.body().getNumerosSorteados();
                                     if (result != null) {
                                         Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
                                     } else {
@@ -209,27 +230,20 @@ public class LoteriaActivity extends AppCompatActivity {
             }
         });
 
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shuffle();
+            }
+        });
     }
 
-    private void createGridByDataFromApi(List<Integer> numerosSorteio) {
-        gridLayout.removeAllViews();
-
-        for (Integer item : numerosSorteio) {
-            TextView textView = createGridItem(item);
-            gridLayout.addView(textView);
-        }
-    }
-
-    private TextView createGridItem(Integer number) {
-        TextView textView = new TextView(this);
-        textView.setLayoutParams(new GridLayout.LayoutParams());
-        textView.setText(String.valueOf(number)); // Convert integer to string
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-        textView.setGravity(Gravity.CENTER);
-        textView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-        textView.setPadding(4, 4, 4, 4);
-
-        return textView;
+    public void shuffle() {
+        gridView.setAdapter(new ArrayAdapter<>(getApplicationContext(),
+                R.layout.grid_item,
+                numbers
+        ));
     }
 }
 
