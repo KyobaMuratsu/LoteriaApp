@@ -9,8 +9,6 @@
     android:orientation="vertical"
     tools:context=".activities.LoteriaActivity">
 
-
-
     <Spinner
         android:id="@+id/conteudoDropdown"
         android:layout_marginTop="66dp"
@@ -22,6 +20,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
