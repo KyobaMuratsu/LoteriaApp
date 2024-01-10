@@ -18,7 +18,6 @@ import br.ifsul.R;
 public class MainActivity extends AppCompatActivity {
 
     private TextView title1;
-
     private Button buttonLogin, buttonRegister;
 
     private FirebaseAuth mAuth;

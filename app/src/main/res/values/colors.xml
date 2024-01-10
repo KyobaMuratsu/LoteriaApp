@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#A8DF8E</color>
+    <color name="cream">#F3FDE8</color>
+    <color name="peach">#FFE5E5</color>
+    <color name="salmon">#FFBFBF</color>
+    <color name="megasena">#157b65</color>
+    <color name="lotofacil">#0042bd</color>
+    <color name="quina">#b12822</color>
+    <color name="timemania">#f5db63</color>
+    <color name="diadesorte">#d0b100</color>
+    <color name="lotomania">#f5db63</color>
 </resources>

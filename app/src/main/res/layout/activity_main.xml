@@ -6,22 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="@color/cream">
 
     <TextView
         android:id="@+id/title1"
+        android:textSize="46dp"
+        android:layout_marginBottom="45dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
 
     <Button
         android:id="@+id/buttonLogin"
+        android:layout_marginTop="45dp"
         android:layout_width="wrap_content"
+        android:backgroundTint="@color/peach"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/peach"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
