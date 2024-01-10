@@ -9,18 +9,18 @@
     tools:context=".activities.MainActivity">
 
     <TextView
-        android:id="@+id/title1"
+        android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
 
     <Button
-        android:id="@+id/buttonLogin"
+        android:id="@+id/botaoLoginId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/botaoRegistrarId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

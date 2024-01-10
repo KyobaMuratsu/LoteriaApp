@@ -5,17 +5,13 @@ import retrofit2.http.GET;
 
 public interface ApiService {
     @GET("megasena")
-    Call<Sorteio> getMegasena();
-
-    @GET("quina")
-    Call<Sorteio> getQuina();
-
+    Call<Sorteio> getSorteioMegasena();
     @GET("lotofacil")
-    Call<Sorteio> getLotoFacil();
-
+    Call<Sorteio> getSorteioLotofacil();
+    @GET("quina")
+    Call<Sorteio> getSorteioQuina();
     @GET("timemania")
-    Call<Sorteio> getTimeMania();
-
+    Call<Sorteio> getSorteioTimemania();
     @GET("diadasorte")
-    Call<Sorteio> getDiaDaSorte();
+    Call<Sorteio> getSorteioDiaDaSorte();
 }

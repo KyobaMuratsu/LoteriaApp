@@ -18,61 +18,56 @@ import com.google.firebase.auth.FirebaseUser;
 
 import br.ifsul.R;
 
-public class LoginActivity extends AppCompatActivity {
-
-    private EditText email, password;
-
-    private Button loggInButton;
-
-    private FirebaseAuth mAuth;
-
-    private String emailString, passwordString;
+public class EntrarActivity extends AppCompatActivity {
+    private Button botaoLogin;
+    private EditText email;
+    private EditText senha;
+    private FirebaseAuth autenticacao;
+    private String emailSelecionado;
+    private String senhaSelecionada;
 
     @Override
     public void onStart(){
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        FirebaseUser usuarioFirebase = autenticacao.getCurrentUser();
+
+        if(usuarioFirebase != null){
             Intent i = new Intent(getApplicationContext(), LoteriaActivity.class);
             startActivity(i);
             finish();
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_entrar);
 
-        mAuth = FirebaseAuth.getInstance();
+        autenticacao = FirebaseAuth.getInstance();
 
         email = findViewById(R.id.emailLogin);
-        password = findViewById(R.id.passwordLogin);
-        loggInButton = findViewById(R.id.buttonLoggin);
+        senha = findViewById(R.id.senhaLogin);
+        botaoLogin = findViewById(R.id.botaoLogin);
 
-        loggInButton.setText("Login");
-        loggInButton.setOnClickListener(new View.OnClickListener() {
+        botaoLogin.setText("Entrar");
+        botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                emailString = email.getText().toString().trim();
-                passwordString = password.getText().toString().trim();
-                mAuth.signInWithEmailAndPassword(emailString, passwordString)
+                emailSelecionado = email.getText().toString().trim();
+                senhaSelecionada = senha.getText().toString().trim();
+                autenticacao.signInWithEmailAndPassword(emailSelecionado, senhaSelecionada)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(LoginActivity.this, "Logado com sucesso :D", Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(getApplicationContext(), LoteriaActivity.class);
                                     startActivity(i);
                                     finish();
-                                }else
-                                    Toast.makeText(LoginActivity.this, "Senha incorreta ou Conta Inexistente! >:v", Toast.LENGTH_SHORT).show();
+                                }
+                                    Toast.makeText(EntrarActivity.this, "Senha incorreta.", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
         });
-
-
     }
 }

@@ -18,10 +18,10 @@
             android:name=".activities.LoteriaActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".activities.RegistrarActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.EntrarActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

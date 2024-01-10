@@ -6,24 +6,21 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.RegisterActivity">
+    tools:context=".activities.EntrarActivity">
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Email"/>
+        android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/senhaLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Senha"/>
+        android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/buttonInstanceRegister"
+        android:id="@+id/botaoLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

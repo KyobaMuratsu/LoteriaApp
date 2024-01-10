@@ -4,26 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import br.ifsul.R;
-import br.ifsul.adapter.GridAdapter;
 import br.ifsul.model.Sorteio;
 import br.ifsul.retrofit.ApiService;
 import br.ifsul.retrofit.RetrofitClient;
@@ -32,68 +24,55 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoteriaActivity extends AppCompatActivity {
-
-//    private GridLayout gridLayout;
-
+    private Button botao;
+    private List<Integer> numeros;
+    private List<String> listaSorteios = new ArrayList<>();
+    private Spinner spinner;
+    private ApiService loteriaService = RetrofitClient.obterInstanciaRetrofit().create(ApiService.class);
     private GridView gridView;
-
-    private Spinner dropdown;
-    private ApiService lotteryService;
-
-    private Button btn;
-
-    private List<Integer> numbers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loteria);
 
-        btn = findViewById(R.id.shuffle_btn);
+        botao = findViewById(R.id.shuffle_btn);
 
-        dropdown = findViewById(R.id.conteudoDropdown);
-
-        lotteryService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
-//        gridLayout = findViewById(R.id.gridLayout);
+        spinner = findViewById(R.id.conteudoDropdown);
 
         gridView = (GridView) findViewById(R.id.gridLayout);
 
-        List<String> sorteios = new ArrayList<>();
-        sorteios.add("MegaSena");
-        sorteios.add("LotoFacil");
-        sorteios.add("Quina");
-        sorteios.add("TimeMania");
-        sorteios.add("DiaDaSorte");
+        alimentarSpinner();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, sorteios);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaSorteios);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        dropdown.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
-        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        botao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gridView.setAdapter(new ArrayAdapter<>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        numeros
+                ));
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selected = adapterView.getSelectedItem().toString().trim();
-                selected = selected.toLowerCase();
+                String selecionado = adapterView.getSelectedItem().toString().toLowerCase();
 
-                switch (selected){
+                switch (selecionado){
                     case "megasena":
-                        Log.d("onItemSelected: ", "Selected:MegaSena");
-                        Call<Sorteio> callMega = lotteryService.getMegasena();
-                        callMega.enqueue(new Callback<Sorteio>() {
+                        Call<Sorteio> chamadaMega = loteriaService.getSorteioMegasena();
+                        chamadaMega.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
-                                    Sorteio result = response.body();
-
-                                    numbers = response.body().getNumerosSorteados();
-                                    if (result != null) {
-                                        Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(LoteriaActivity.this, "Response body is null", Toast.LENGTH_SHORT).show();
-                                    }
+                                    numeros = response.body().getNumerosSorteados();
                                 } else {
                                     Toast.makeText(LoteriaActivity.this, "Response not successful", Toast.LENGTH_SHORT).show();
                                 }
@@ -101,28 +80,18 @@ public class LoteriaActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<Sorteio> call, Throwable t) {
-                                Log.e( "onFailure: ", "Failed network", t);
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
 
                     case "lotofacil":
-                        Log.d("onItemSelected: ", "Selected:LotoFacil");
-                        Call<Sorteio> callLoto = lotteryService.getLotoFacil();
-                        callLoto.enqueue(new Callback<Sorteio>() {
+                        Call<Sorteio> chamadaLoto = loteriaService.getSorteioLotofacil();
+                        chamadaLoto.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
-                                    Sorteio result = response.body();
-
-                                    numbers = response.body().getNumerosSorteados();
-                                    if (result != null) {
-                                        Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
-
-                                    } else {
-                                        Toast.makeText(LoteriaActivity.this, "Response body is null", Toast.LENGTH_SHORT).show();
-                                    }
+                                    numeros = response.body().getNumerosSorteados();
                                 } else {
                                     Toast.makeText(LoteriaActivity.this, "Response not successful", Toast.LENGTH_SHORT).show();
                                 }
@@ -137,20 +106,12 @@ public class LoteriaActivity extends AppCompatActivity {
                         break;
 
                     case "quina":
-                        Log.d("onItemSelected: ", "Selected:Quina");
-                        Call<Sorteio> callQuina = lotteryService.getQuina();
-                        callQuina.enqueue(new Callback<Sorteio>() {
+                        Call<Sorteio> chamadaQuina = loteriaService.getSorteioQuina();
+                        chamadaQuina.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
-                                    Sorteio result = response.body();
-
-                                    numbers = response.body().getNumerosSorteados();
-                                    if (result != null) {
-                                        Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(LoteriaActivity.this, "Response body is null", Toast.LENGTH_SHORT).show();
-                                    }
+                                    numeros = response.body().getNumerosSorteados();
                                 } else {
                                     Toast.makeText(LoteriaActivity.this, "Response not successful", Toast.LENGTH_SHORT).show();
                                 }
@@ -164,20 +125,12 @@ public class LoteriaActivity extends AppCompatActivity {
                         });
                         break;
                     case "timemania":
-                        Log.d("onItemSelected: ", "Selected:TimeMania");
-                        Call<Sorteio> callMania = lotteryService.getTimeMania();
-                        callMania.enqueue(new Callback<Sorteio>() {
+                        Call<Sorteio> chamadaMania = loteriaService.getSorteioTimemania();
+                        chamadaMania.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
-                                    Sorteio result = response.body();
-
-                                    numbers = response.body().getNumerosSorteados();
-                                    if (result != null) {
-                                        Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(LoteriaActivity.this, "Response body is null", Toast.LENGTH_SHORT).show();
-                                    }
+                                    numeros = response.body().getNumerosSorteados();
                                 } else {
                                     Toast.makeText(LoteriaActivity.this, "Response not successful", Toast.LENGTH_SHORT).show();
                                 }
@@ -191,20 +144,12 @@ public class LoteriaActivity extends AppCompatActivity {
                         });
                         break;
                     case "diadasorte":
-                        Log.d("onItemSelected: ", "Selected:DiaDaSorte");
-                        Call<Sorteio> callSorte = lotteryService.getDiaDaSorte();
-                        callSorte.enqueue(new Callback<Sorteio>() {
+                        Call<Sorteio> chamadaSorte = loteriaService.getSorteioDiaDaSorte();
+                        chamadaSorte.enqueue(new Callback<Sorteio>() {
                             @Override
                             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
                                 if (response.isSuccessful()) {
-                                    Sorteio result = response.body();
-
-                                    numbers = response.body().getNumerosSorteados();
-                                    if (result != null) {
-                                        Toast.makeText(LoteriaActivity.this, result.getTema(), Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(LoteriaActivity.this, "Response body is null", Toast.LENGTH_SHORT).show();
-                                    }
+                                    numeros = response.body().getNumerosSorteados();
                                 } else {
                                     Toast.makeText(LoteriaActivity.this, "Response not successful", Toast.LENGTH_SHORT).show();
                                 }
@@ -221,29 +166,19 @@ public class LoteriaActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shuffle();
-            }
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
     }
 
-    public void shuffle() {
-        gridView.setAdapter(new ArrayAdapter<>(getApplicationContext(),
-                R.layout.grid_item,
-                numbers
-        ));
+    public void alimentarSpinner() {
+        listaSorteios.add("MEGASENA");
+        listaSorteios.add("LOTOFACIL");
+        listaSorteios.add("QUINA");
+        listaSorteios.add("TIMEMANIA");
+        listaSorteios.add("DIADASORTE");
     }
 }
 

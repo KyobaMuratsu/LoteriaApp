@@ -15,28 +15,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/shuffle_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="12dp"
-        android:layout_marginBottom="56dp"
-        android:autoSizePresetSizes="12dp"
-        android:onClick="shuffle"
-        android:text="sorteio"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.456"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/tipoSorteio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
@@ -46,12 +30,28 @@
             android:id="@+id/gridLayout"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:numColumns="3"
+            android:numColumns="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/shuffle_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="12dp"
+        android:layout_marginBottom="56dp"
+        android:autoSizePresetSizes="12dp"
+        android:onClick="sortear"
+        android:text="sortear"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

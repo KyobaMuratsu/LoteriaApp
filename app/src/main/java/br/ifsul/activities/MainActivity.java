@@ -8,51 +8,43 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
-
 import br.ifsul.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView title1;
+    private TextView titulo;
 
-    private Button buttonLogin, buttonRegister;
+    private Button botaoLogin;
 
-    private FirebaseAuth mAuth;
+    private Button botaoRegistrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        title1 = findViewById(R.id.title1);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        buttonRegister = findViewById(R.id.buttonRegister);
+        titulo = findViewById(R.id.titulo);
+        botaoLogin = findViewById(R.id.botaoLoginId);
+        botaoRegistrar = findViewById(R.id.botaoRegistrarId);
 
-        title1.setText("Bem-Vindo(a)");
-        buttonLogin.setText("Login");
-        buttonRegister.setText("Registrar");
+        titulo.setText("bem-vindo");
+        botaoLogin.setText("entrar");
+        botaoRegistrar.setText("registrar");
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                Intent i = new Intent(MainActivity.this, EntrarActivity.class);
                 startActivity(i);
             }
         });
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        botaoRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent i = new Intent(MainActivity.this, RegistrarActivity.class);
                 startActivity(i);
             }
         });
-
-
-
     }
 }
