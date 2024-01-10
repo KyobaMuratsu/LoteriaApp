@@ -26,12 +26,6 @@
         <activity
             android:name=".LoteriaActivity"
             android:exported="false" />
-        <activity
-            android:name=".RegistrarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EntrarActivity"
-            android:exported="false" />
     </application>
 
 

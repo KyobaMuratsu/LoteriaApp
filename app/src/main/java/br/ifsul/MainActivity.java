@@ -12,9 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView titulo;
 
-    private Button botaoLogin;
-
-    private Button botaoRegistrar;
+    private Button botaoEntrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         titulo = findViewById(R.id.titulo);
-        botaoLogin = findViewById(R.id.botaoLoginId);
-        botaoRegistrar = findViewById(R.id.botaoRegistrarId);
+        botaoEntrar = findViewById(R.id.botaoEntrarId);
 
         titulo.setText("bem-vindo");
-        botaoLogin.setText("entrar");
-        botaoRegistrar.setText("registrar");
+        botaoEntrar.setText("entre na loteria!");
 
-        botaoLogin.setOnClickListener(new View.OnClickListener() {
+        botaoEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, EntrarActivity.class);
-                startActivity(i);
-            }
-        });
-
-        botaoRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, RegistrarActivity.class);
+                Intent i = new Intent(MainActivity.this, LoteriaActivity.class);
                 startActivity(i);
             }
         });
