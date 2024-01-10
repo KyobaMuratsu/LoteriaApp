@@ -1,17 +1,17 @@
 package br.ifsul.retrofit;
-import br.ifsul.model.Sorteio;
+import br.ifsul.model.SorteioResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiService {
     @GET("megasena")
-    Call<Sorteio> getSorteioMegasena();
+    Call<SorteioResponse> getSorteioMegasena();
     @GET("lotofacil")
-    Call<Sorteio> getSorteioLotofacil();
+    Call<SorteioResponse> getSorteioLotofacil();
     @GET("quina")
-    Call<Sorteio> getSorteioQuina();
+    Call<SorteioResponse> getSorteioQuina();
     @GET("timemania")
-    Call<Sorteio> getSorteioTimemania();
+    Call<SorteioResponse> getSorteioTimemania();
     @GET("diadasorte")
-    Call<Sorteio> getSorteioDiaDaSorte();
+    Call<SorteioResponse> getSorteioDiaDaSorte();
 }

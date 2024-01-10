@@ -1,4 +1,4 @@
-package br.ifsul.activities;
+package br.ifsul;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +14,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import br.ifsul.R;
 
 public class RegistrarActivity extends AppCompatActivity {
 
@@ -34,7 +32,7 @@ public class RegistrarActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         senha = findViewById(R.id.senha);
-        botaoRegistrar = findViewById(R.id.botaoRegister);
+        botaoRegistrar = findViewById(R.id.botaoRegistrar);
 
         botaoRegistrar.setText("Registrar");
         botaoRegistrar.setOnClickListener(new View.OnClickListener() {

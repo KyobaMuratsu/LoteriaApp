@@ -12,19 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Loterica"
+        android:theme="@style/Theme.Loteria"
         tools:targetApi="31">
         <activity
-            android:name=".activities.LoteriaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.RegistrarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.EntrarActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".LoteriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EntrarActivity"
+            android:exported="false" />
     </application>
 
 

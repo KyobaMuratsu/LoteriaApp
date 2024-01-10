@@ -3,7 +3,7 @@ package br.ifsul.model;
 import java.util.Date;
 import java.util.List;
 
-public class Sorteio {
+public class SorteioResponse {
     private String tema;
     private int numero;
     private Date data;

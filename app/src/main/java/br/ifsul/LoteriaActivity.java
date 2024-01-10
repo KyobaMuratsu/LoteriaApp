@@ -1,4 +1,4 @@
-package br.ifsul.activities;
+package br.ifsul;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ifsul.R;
-import br.ifsul.model.Sorteio;
+import br.ifsul.model.SorteioResponse;
 import br.ifsul.retrofit.ApiService;
 import br.ifsul.retrofit.RetrofitClient;
 import retrofit2.Call;
@@ -67,10 +66,10 @@ public class LoteriaActivity extends AppCompatActivity {
 
                 switch (selecionado){
                     case "megasena":
-                        Call<Sorteio> chamadaMega = loteriaService.getSorteioMegasena();
-                        chamadaMega.enqueue(new Callback<Sorteio>() {
+                        Call<SorteioResponse> chamadaMega = loteriaService.getSorteioMegasena();
+                        chamadaMega.enqueue(new Callback<SorteioResponse>() {
                             @Override
-                            public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+                            public void onResponse(Call<SorteioResponse> call, Response<SorteioResponse> response) {
                                 if (response.isSuccessful()) {
                                     numeros = response.body().getNumerosSorteados();
                                 } else {
@@ -79,17 +78,17 @@ public class LoteriaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Sorteio> call, Throwable t) {
+                            public void onFailure(Call<SorteioResponse> call, Throwable t) {
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
 
                     case "lotofacil":
-                        Call<Sorteio> chamadaLoto = loteriaService.getSorteioLotofacil();
-                        chamadaLoto.enqueue(new Callback<Sorteio>() {
+                        Call<SorteioResponse> chamadaLoto = loteriaService.getSorteioLotofacil();
+                        chamadaLoto.enqueue(new Callback<SorteioResponse>() {
                             @Override
-                            public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+                            public void onResponse(Call<SorteioResponse> call, Response<SorteioResponse> response) {
                                 if (response.isSuccessful()) {
                                     numeros = response.body().getNumerosSorteados();
                                 } else {
@@ -98,7 +97,7 @@ public class LoteriaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Sorteio> call, Throwable t) {
+                            public void onFailure(Call<SorteioResponse> call, Throwable t) {
                                 Log.e( "onFailure: ", "Failed network", t);
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
@@ -106,10 +105,10 @@ public class LoteriaActivity extends AppCompatActivity {
                         break;
 
                     case "quina":
-                        Call<Sorteio> chamadaQuina = loteriaService.getSorteioQuina();
-                        chamadaQuina.enqueue(new Callback<Sorteio>() {
+                        Call<SorteioResponse> chamadaQuina = loteriaService.getSorteioQuina();
+                        chamadaQuina.enqueue(new Callback<SorteioResponse>() {
                             @Override
-                            public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+                            public void onResponse(Call<SorteioResponse> call, Response<SorteioResponse> response) {
                                 if (response.isSuccessful()) {
                                     numeros = response.body().getNumerosSorteados();
                                 } else {
@@ -118,17 +117,17 @@ public class LoteriaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Sorteio> call, Throwable t) {
+                            public void onFailure(Call<SorteioResponse> call, Throwable t) {
                                 Log.e( "onFailure: ", "Failed network", t);
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
                     case "timemania":
-                        Call<Sorteio> chamadaMania = loteriaService.getSorteioTimemania();
-                        chamadaMania.enqueue(new Callback<Sorteio>() {
+                        Call<SorteioResponse> chamadaMania = loteriaService.getSorteioTimemania();
+                        chamadaMania.enqueue(new Callback<SorteioResponse>() {
                             @Override
-                            public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+                            public void onResponse(Call<SorteioResponse> call, Response<SorteioResponse> response) {
                                 if (response.isSuccessful()) {
                                     numeros = response.body().getNumerosSorteados();
                                 } else {
@@ -137,17 +136,17 @@ public class LoteriaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Sorteio> call, Throwable t) {
+                            public void onFailure(Call<SorteioResponse> call, Throwable t) {
                                 Log.e( "onFailure: ", "Failed network", t);
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
                     case "diadasorte":
-                        Call<Sorteio> chamadaSorte = loteriaService.getSorteioDiaDaSorte();
-                        chamadaSorte.enqueue(new Callback<Sorteio>() {
+                        Call<SorteioResponse> chamadaSorte = loteriaService.getSorteioDiaDaSorte();
+                        chamadaSorte.enqueue(new Callback<SorteioResponse>() {
                             @Override
-                            public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+                            public void onResponse(Call<SorteioResponse> call, Response<SorteioResponse> response) {
                                 if (response.isSuccessful()) {
                                     numeros = response.body().getNumerosSorteados();
                                 } else {
@@ -156,7 +155,7 @@ public class LoteriaActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<Sorteio> call, Throwable t) {
+                            public void onFailure(Call<SorteioResponse> call, Throwable t) {
                                 Log.e( "onFailure: ", "Failed network", t);
                                 Toast.makeText(LoteriaActivity.this, "Network Problem", Toast.LENGTH_SHORT).show();
                             }
